@@ -1,7 +1,7 @@
 package main.start;
 
 import table.CustomFrame;
-
+//klasa main
 public class Main { 
 	private CustomFrame f;
 	public static void main(String[] args) {
