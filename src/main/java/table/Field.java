@@ -5,7 +5,11 @@ import java.awt.geom.Ellipse2D;
 
 //pole na planszy
 public class Field extends Ellipse2D.Double {
-    boolean occupied;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	boolean occupied;
     double height;
     double width;
     double x;
@@ -25,7 +29,15 @@ public class Field extends Ellipse2D.Double {
     public boolean isOccupied(){
         return this.occupied;
     }
-
+    
+    public void setEmpty() {
+    	this.occupied = false;
+    }
+    
+    public void setOccupied() {
+    	this.occupied = true;
+    }
+    
     public void ChangeColor(Color newColor){
         this.FieldColor=newColor;
     }

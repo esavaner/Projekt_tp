@@ -13,6 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		new Main();
 	}
+	//okno startowe
 	public Main() {
 		sw = new StartWindow();
 		sw.setVisible(true);
