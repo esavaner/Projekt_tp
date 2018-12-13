@@ -4,14 +4,11 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-import table.CustomFrame;
 
 public class GetIPWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +22,10 @@ public class GetIPWindow extends JDialog {
 		JButton joinButton = new JButton("Do³¹cz");
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				join();
+				try {
+					join();
+				} catch (Exception e1) {
+				}
 			}
 		});
 		this.add(joinButton);
@@ -36,20 +36,9 @@ public class GetIPWindow extends JDialog {
 	public void setVisible() {
 		this.setVisible(true);
 	}
-	public void join() {
-		try {
-			Main.joinServer(joinText.getText());
-			setVisible(false);
-			begin();
-		} 
-		catch (IOException e1) {
-			joinText.setText("");
-			joinLabel.setText("Z³y adres IP serwera");
-		}
-	}
-	public void begin() {
-		Main.f = new CustomFrame();
-		Main.f.setVisible(true);
+	public void join() throws Exception {
 		this.setVisible(false);
+		Client.ipAddress = joinText.getText();
+		Client client = Client.getClient();
 	}
 }

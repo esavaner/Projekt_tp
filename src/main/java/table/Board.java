@@ -1,5 +1,7 @@
 package table;
 
+import main.start.Client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +11,13 @@ import java.awt.event.ActionListener;
 //na ten moment moÅ¼na jedynie wykonywaÄ‡ dowolne ruchy pionkami po planszy
 
 public class Board extends JPanel implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static boolean blocked = true;
+	public static JLabel messageLabel;
+	private Client client = null;
     Field[] pola;
     Field pole;
     JPanel[][] panelHolder;
@@ -104,32 +113,36 @@ public class Board extends JPanel implements ActionListener {
         addPlayer1();
         addPlayer4();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        final JButton ready = new JButton("Gotowoœæ");
+        final JDialog message = new JDialog();
+        message.setBounds(1500,200,300,100);
+        messageLabel = new JLabel("Witaj w grze, oczekiwane na graczy");
+        messageLabel.setSize(280,70);
+        message.setLayout(new FlowLayout())	;
+        message.add(messageLabel);
+        message.add(ready);
+        ready.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				message.remove(ready);
+				messageLabel.setText("Oczekiwanie na gotowoœæ innych graczy");
+				message.repaint();
+				try {
+					client = Client.getClient();
+				} catch (Exception e1) {
+				}
+				client.getOut().println("READY");
+			}
+		});
+        message.setVisible(true);
 
     }
+
     public void actionPerformed(ActionEvent e) {
 
         Object obj = e.getSource();
-
+        if(!blocked) {
         if (obj instanceof Field) {
         	Field cb = (Field)obj;
-
 
 
         	if(moving){
@@ -139,6 +152,8 @@ public class Board extends JPanel implements ActionListener {
                 cb.FieldColor=temp;
                 pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
                 cb.repaint(); pole.repaint();
+                client.move(pole.getX(), pole.getY(), cb.getX(), cb.getY());
+                blocked = true;
 
             }
 
@@ -149,12 +164,14 @@ public class Board extends JPanel implements ActionListener {
         	        cb.repaint();
         	         selected=true;}
 
-
+        	}
 
         }
         }
     }
-
+    public static void update(int oldX, int oldY, int newX, int newY) {
+    	
+    }
     public void addPlayer1(){
         for (int z=1; z<=10; z++){pola[z].FieldColor=Color.RED; pola[z].setOccupied(); pola[z].repaint();}
 

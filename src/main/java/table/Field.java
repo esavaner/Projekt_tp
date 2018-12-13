@@ -30,7 +30,7 @@ public class Field extends JButton {
         //this.x = x - (r / 2);
         //this.y = y - (r / 2);
         Dimension size = getPreferredSize();
-        size.width = size.height = Math.max(size.width-5, size.height-5);
+        size.width = size.height = Math.max(size.width, size.height);
         setPreferredSize(size);
         setContentAreaFilled(false);
 
