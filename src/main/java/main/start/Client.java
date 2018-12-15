@@ -8,34 +8,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
-
 import table.CustomFrame;
 import table.Field;
 
 import javax.swing.*;
 
 public class Client extends Thread implements ActionListener {
+	public static JLabel messageLabel;
 	private volatile static Client instance = null;
 	public static String ipAddress = null;
 	private Socket socket;
 	private BufferedReader in;
-    private PrintWriter out;
-    public static boolean blocked = true;
-    public static JLabel messageLabel;
-    Field[] pola;
-    Field pole;
-    JPanel[][] panelHolder;
-    JPanel panelglowny;
-
-    CustomFrame f;
-
-    boolean moving=true;
-    boolean selected=false;
-
-
-    Color defaultColor=Color.WHITE;
-    Color temp;
+    private static PrintWriter out;
+    private boolean blocked = true;
+	Field[] pola;
+	Field pole;
+	JPanel[][] panelHolder;
+	JPanel panelglowny;
+	CustomFrame f;
+	boolean moving=true;
+	boolean selected=false;
+	Color defaultColor=Color.WHITE;
+	Color temp;
+	
 	public Client() throws Exception {
 		socket = new Socket(ipAddress, 8901);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -122,12 +117,13 @@ public class Client extends Thread implements ActionListener {
 
         pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[12][row].add(pole); pola[counter]=pole; counter++;
 
-//todo przestawić dodawanie pionków na plansze gdzie indziej
+      //todo przestawić dodawanie pionków na plansze gdzie indziej
         addPlayer1();
         addPlayer4();
         f.add(panelglowny);
         f.setVisible(true);
-        final JButton ready = new JButton("Gotowo��");
+        
+        final JButton ready = new JButton("Gotowosc");
         final JDialog message = new JDialog();
         message.setBounds(700,200,300,100);
         messageLabel = new JLabel("Witaj w grze, oczekiwane na graczy");
@@ -138,81 +134,20 @@ public class Client extends Thread implements ActionListener {
         ready.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 message.remove(ready);
-                messageLabel.setText("Oczekiwanie na gotowo�� innych graczy");
+                messageLabel.setText("Oczekiwanie na gotowosc innych graczy");
                 message.repaint();
-                //try {
-                    //client = Client.getClient();
-                //} catch (Exception e1) {
-                //}
-                getOut().println("READY");
+                out.println("READY");
             }
         });
         message.setVisible(true);
+        
 		start();
 	}
-	public static Client getClient() throws Exception {
-		if(instance == null) {
-			synchronized(Client.class) {
-				if(instance == null) {
-					instance = new Client();
-				}
-			}
-		}
-		return instance;
-	}
-	public void run(){
-	    String response;
-		try {
-			while(true) {
-				response = in.readLine();
-				if(response.startsWith("YOUR")) {
-					this.blocked = false;
-					this.messageLabel.setText("Tw�j ruch");
-					this.messageLabel.repaint();
-				}
-				else if(response.startsWith("WELCOME")) {
-					System.out.println("welcome");
-				}
-				else if(response.startsWith("UPDATE")) {
-					//this.update(response.charAt(7), response.charAt(8) ,response.charAt(9), response.charAt(10));
-				}
-				else if(response.startsWith("SHUTDOWN")) {
-					break;
-				}
-				else if(response.startsWith("RUCH")) {
-					this.messageLabel.setText("Ruch gracza " + response.charAt(5));
-				}
-				//todo możliwe że nie potrzebne
-                else if(response.startsWith("START")) {
-
-                    this.messageLabel.setText("zaczynamy");
-                    this.messageLabel.repaint();
-                }
-			}
-			out.println("QUIT");
-		} catch(IOException e){
-
-        }
-
-		finally {
-		    try{
-			socket.close();} catch(IOException e){}
-		}
-	}
-	public Socket getSocket() {
-		return this.socket;
-	}
-	public void move(int oldX, int oldY, int newX, int newY) {
-		out.println("MOVE " + oldX + oldY + newX + newY );
-	}
-	public PrintWriter getOut() {
-		return this.out;
-	}
-
-    public void actionPerformed(ActionEvent e) {
+	
+	public void actionPerformed(ActionEvent e) {
 
         Object obj = e.getSource();
-        if(!blocked) {
+        if(blocked == false) {
             if (obj instanceof Field) {
                 Field cb = (Field)obj;
 
@@ -224,9 +159,10 @@ public class Client extends Thread implements ActionListener {
                         cb.FieldColor=temp;
                         pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
                         cb.repaint(); pole.repaint();
-                        move(pole.getX(), pole.getY(), cb.getX(), cb.getY());
+                        //tutaj jest ok, przekazuje move do outputstreama
+                        out.println("MOVE ");
+                        System.out.println("MOVE ");
                         blocked = true;
-
                     }
 
                     else if(!selected && cb.isOccupied()){
@@ -235,21 +171,76 @@ public class Client extends Thread implements ActionListener {
                         cb.FieldColor=Color.cyan;
                         cb.repaint();
                         selected=true;}
-
                 }
 
             }
         }
     }
+	
+	public static Client getClient() throws Exception {
+		if(instance == null) {
+			synchronized(Client.class) {
+				if(instance == null) {
+					instance = new Client();
+				}
+			}
+		}
+		return instance;
+	}
+	
+	public void run(){
+	    String response;
+		try {
+			while(true) {
+				response = in.readLine();
+				if(response.startsWith("YOUR")) {
+					blocked = false;
+					messageLabel.setText("Twoj ruch");
+					messageLabel.repaint();
+				}
+				else if(response.startsWith("UPDATE")) {
+					//this.update(response.charAt(7), response.charAt(8) ,response.charAt(9), response.charAt(10));
+				}
+				else if(response.startsWith("SHUTDOWN")) {
+					break;
+				}
+				else if(response.startsWith("RUCH")) {
+					messageLabel.setText("Ruch gracza " + response.charAt(5));
+					messageLabel.repaint();
+				}
+				//todo możliwe że nie potrzebne
+				/*
+                else if(response.startsWith("START")) {
 
-   /** metody dodające na planszę pionki poszczególnych graczy*/
-    public void addPlayer1(){
+                	messageLabel.setText("zaczynamy");
+                	messageLabel.repaint();
+                }*/
+			}
+			out.println("QUIT");
+		} catch(IOException e){
+
+        }
+
+		finally {
+		    try{
+			socket.close();} catch(IOException e){}
+		}
+	}
+	
+	public Socket getSocket() {
+		return this.socket;
+	}
+	
+	public void addPlayer1(){
         for (int z=1; z<=10; z++){pola[z].FieldColor=Color.RED; pola[z].setOccupied(); pola[z].repaint();}
-
     }
 
     public void addPlayer4() {
         for (int z=112; z<=121; z++){pola[z].FieldColor=Color.YELLOW; pola[z].setOccupied(); pola[z].repaint();}
-
     }
+
+    public static void update() {
+    	
+    }
+
 }

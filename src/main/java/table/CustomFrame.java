@@ -19,11 +19,5 @@ public class CustomFrame extends JFrame{
 		setLocation(100, 50);
 		setResizable(false);
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-
-
 	}
-
-
-
-
 }
