@@ -13,11 +13,11 @@ public class CustomFrame extends JFrame{
 		super("Projekt tp");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		Double width = (double) (0.8 * screenSize.getWidth());
+		Double width = (double) (0.7 * screenSize.getWidth());
 		Double height = (double) (0.5 * screenSize.getWidth());
 		setSize(width.intValue(), height.intValue());
 		setLocation(100, 50);
 		setResizable(false);
-		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		setLayout(new FlowLayout());
 	}
 }

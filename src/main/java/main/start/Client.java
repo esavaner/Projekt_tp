@@ -57,7 +57,7 @@ public class Client extends Thread implements ActionListener {
 
 
 
-        panelglowny.setPreferredSize(new Dimension(f.getHeight(),f.getHeight()));
+        panelglowny.setPreferredSize(new Dimension((int)(f.getHeight()*0.8), (int)(f.getHeight()*0.9) ));
         int counter=1;
         int row=0;
 
@@ -124,13 +124,15 @@ public class Client extends Thread implements ActionListener {
         f.setVisible(true);
         
         final JButton ready = new JButton("Gotowosc");
-        final JDialog message = new JDialog();
+        final JPanel message = new JPanel();
+        message.setPreferredSize(new Dimension((int)(f.getHeight()*0.8), (int)(f.getHeight()*0.1) ));
         message.setBounds(700,200,300,100);
         messageLabel = new JLabel("Witaj w grze, oczekiwane na graczy");
         messageLabel.setSize(280,70);
         message.setLayout(new FlowLayout())	;
         message.add(messageLabel);
         message.add(ready);
+        f.add(message);
         ready.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 message.remove(ready);
