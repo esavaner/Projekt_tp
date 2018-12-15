@@ -23,9 +23,15 @@ public class Field extends JButton {
         size.width = size.height = Math.max(size.width-5, size.height-5);
         setPreferredSize(size);
         setContentAreaFilled(false);
-
-
-
+    
+    }
+    
+    public Color getColor() {
+    	return this.FieldColor;
+    }
+    
+    public int getNumber() {
+    	return this.nr;
     }
 
     public boolean isOccupied() {
@@ -40,7 +46,7 @@ public class Field extends JButton {
         this.occupied = true;
     }
 
-    public void ChangeColor(Color newColor) {
+    public void changeColor(Color newColor) {
         this.FieldColor = newColor;
         this.repaint();
     }

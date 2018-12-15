@@ -162,8 +162,8 @@ public class Client extends Thread implements ActionListener {
                         pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
                         cb.repaint(); pole.repaint();
                         //tutaj jest ok, przekazuje move do outputstreama
-                        out.println("MOVE ");
-                        System.out.println("MOVE ");
+                        out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
+                        System.out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
                         blocked = true;
                     }
 
@@ -241,8 +241,10 @@ public class Client extends Thread implements ActionListener {
         for (int z=112; z<=121; z++){pola[z].FieldColor=Color.YELLOW; pola[z].setOccupied(); pola[z].repaint();}
     }
 
-    public static void update() {
-    	
+    public void update(int oldPlace, int newPlace) {
+    	Color oldColor = pola[oldPlace].getColor();
+    	pola[oldPlace].changeColor(defaultColor);
+    	pola[newPlace].changeColor(oldColor);
     }
 
 }
