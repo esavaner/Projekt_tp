@@ -8,6 +8,10 @@ public class Game extends Thread {
 	private int current = 0;
 	public static List<Player> players = new ArrayList<Player>();
 	public void run() {
+		System.out.println("Game started");
+		for(Player p : players){
+			p.starting();
+		}
 		while(true) {
 			currentPlayer = players.get(current);
 			String command = null;

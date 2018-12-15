@@ -9,7 +9,7 @@ public class Bot extends Player {
 		this.socket = socket;
 	}
 
-	@Override
+	//@Override
 	public void doMove() {
 		
 	}

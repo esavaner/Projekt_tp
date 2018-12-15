@@ -16,7 +16,7 @@ public class Field extends JButton {
     //int x;
     //int y;
     int nr;
-    Color FieldColor;
+    public Color FieldColor;
     Shape shape;
 
 

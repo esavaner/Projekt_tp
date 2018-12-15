@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Player {
+public class Player extends Thread{
 	Socket socket;
     BufferedReader input;
     PrintWriter output;
@@ -21,7 +21,7 @@ public class Player {
         	System.out.println("Player died: " + e);
         }
     }
-    public void start() {
+    public void run() {System.out.println("started!");
     	try {
     		while(true) {
     	   		String command = input.readLine();
@@ -52,5 +52,10 @@ public class Player {
     }
     public void update(int oldX, int oldY, int newX, int newY) {
     	output.println("UPDATE " + oldX + oldY + newX + newY);
+    }
+
+    public void starting(){
+        System.out.println("player zrozumial, przekazuje dalej");
+        output.println("STARTING");
     }
 }

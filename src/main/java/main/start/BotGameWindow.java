@@ -9,7 +9,8 @@ import javax.swing.JDialog;
 
 import table.CustomFrame;
 
-public class BotGameWindow extends JDialog {
+public class
+BotGameWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	public JButton b2;
 	public JButton b3;

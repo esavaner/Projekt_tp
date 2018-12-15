@@ -16,7 +16,9 @@ public class ProjectServer {
     public static void main(String[] args) throws Exception {
     	listener = new ServerSocket(8901);
         System.out.println("Project Server is Running");
-        try {
+
+
+         try {
 	        InetAddress iAddress = InetAddress.getLocalHost();
 	        server_IP = iAddress.getHostAddress();
 	        System.out.println("Server IP address : " +server_IP);
@@ -24,23 +26,35 @@ public class ProjectServer {
 	    }
         try {
         	game = new Game();
-            while(playersJoined < 6) {
+
+        	/**while(playersJoined < 6) {
             	Player player = new Player(listener.accept());
             	if(!gameStarted) {
             		game.add(player);
             		playersJoined++;
-            		System.out.println("Do³¹czy³ nowy gracz");
+            		System.out.println("Doï¿½ï¿½czyï¿½ nowy gracz");
             	}
-            }
+            }*/
+            Player player1 = new Player(listener.accept());
+            game.add(player1);
+            playersJoined++;
+            System.out.println("Doï¿½ï¿½czyï¿½ nowy gracz");
+            Player player2 = new Player(listener.accept());
+            game.add(player2);
+            playersJoined++;
+            System.out.println("Doï¿½ï¿½czyï¿½ nowy gracz");
+            player1.start();
+            player2.start();
         } 
         finally {
             listener.close();
         }
+
     }
     public static void check() {
     	playersReady++;
     	if(playersReady == playersJoined) {
-    		System.out.println("Gra zaczêta");
+    		System.out.println("Gra zaczï¿½ta");
     		gameStarted = true;
     		game.start();
     	}

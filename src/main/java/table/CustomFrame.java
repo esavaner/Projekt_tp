@@ -20,10 +20,10 @@ public class CustomFrame extends JFrame{
 		setResizable(false);
 		setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
-		Board board=new Board(height.intValue(),width.intValue());
+		//Board board=new Board(height.intValue(),width.intValue());
 
 
-		add(board);
+		//add(board);
 
 
 	}
