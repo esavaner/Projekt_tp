@@ -27,6 +27,8 @@ public class ProjectServer {
         try {
         	game = new Game();
 
+        	//todo tymczasowe przydzielanie tylko dwoch graczy
+
         	/**while(playersJoined < 6) {
             	Player player = new Player(listener.accept());
             	if(!gameStarted) {
@@ -54,7 +56,6 @@ public class ProjectServer {
     public static void check() {
     	playersReady++;
     	if(playersReady == playersJoined) {
-    		System.out.println("Gra zacz�ta");
     		gameStarted = true;
     		game.start();
     	}

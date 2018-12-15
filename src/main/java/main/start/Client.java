@@ -59,7 +59,10 @@ public class Client extends Thread implements ActionListener {
                 panelglowny.add(panelHolder[n][m]);
             }
         }
-        //panelglowny.setPreferredSize(new Dimension(height,height));
+
+
+
+        panelglowny.setPreferredSize(new Dimension(f.getHeight(),f.getHeight()));
         int counter=1;
         int row=0;
 
@@ -119,7 +122,7 @@ public class Client extends Thread implements ActionListener {
 
         pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[12][row].add(pole); pola[counter]=pole; counter++;
 
-//todo przestawić dodawanie graczy gdzie indziej
+//todo przestawić dodawanie pionków na plansze gdzie indziej
         addPlayer1();
         addPlayer4();
         f.add(panelglowny);
@@ -137,24 +140,15 @@ public class Client extends Thread implements ActionListener {
                 message.remove(ready);
                 messageLabel.setText("Oczekiwanie na gotowo�� innych graczy");
                 message.repaint();
-                try {
+                //try {
                     //client = Client.getClient();
-                } catch (Exception e1) {
-                }
+                //} catch (Exception e1) {
+                //}
                 getOut().println("READY");
             }
         });
         message.setVisible(true);
-		//todo
-        //cos nie tak z tym waitem, nie odpala play(), ale gdy nie ma wait to nic nie dziala
-       // synchronized (Main.f) {
-
-
-
-       //wait(10);
-      //}
-        //f.repaint();
-        start();
+		start();
 	}
 	public static Client getClient() throws Exception {
 		if(instance == null) {
@@ -167,9 +161,7 @@ public class Client extends Thread implements ActionListener {
 		return instance;
 	}
 	public void run(){
-	    System.out.println("client waiting for messages");
-
-		String response;
+	    String response;
 		try {
 			while(true) {
 				response = in.readLine();
@@ -190,6 +182,7 @@ public class Client extends Thread implements ActionListener {
 				else if(response.startsWith("RUCH")) {
 					this.messageLabel.setText("Ruch gracza " + response.charAt(5));
 				}
+				//todo możliwe że nie potrzebne
                 else if(response.startsWith("START")) {
 
                     this.messageLabel.setText("zaczynamy");
@@ -249,7 +242,7 @@ public class Client extends Thread implements ActionListener {
         }
     }
 
-
+   /** metody dodające na planszę pionki poszczególnych graczy*/
     public void addPlayer1(){
         for (int z=1; z<=10; z++){pola[z].FieldColor=Color.RED; pola[z].setOccupied(); pola[z].repaint();}
 

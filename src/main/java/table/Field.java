@@ -11,26 +11,16 @@ public class Field extends JButton {
      */
     private static final long serialVersionUID = 1L;
     boolean occupied;
-    //int height;
-    //int width;
-    //int x;
-    //int y;
     int nr;
     public Color FieldColor;
     Shape shape;
 
-
-    //public Field(int x, int y, int r, Color color, int number) {
     public Field(Color color, int number){
         this.occupied = false;
         this.FieldColor = color;
         this.nr=number;
-        //this.height = r;
-        //this.width = r;
-        //this.x = x - (r / 2);
-        //this.y = y - (r / 2);
         Dimension size = getPreferredSize();
-        size.width = size.height = Math.max(size.width, size.height);
+        size.width = size.height = Math.max(size.width-5, size.height-5);
         setPreferredSize(size);
         setContentAreaFilled(false);
 
@@ -52,6 +42,7 @@ public class Field extends JButton {
 
     public void ChangeColor(Color newColor) {
         this.FieldColor = newColor;
+        this.repaint();
     }
 
 

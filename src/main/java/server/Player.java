@@ -21,12 +21,11 @@ public class Player extends Thread{
         	System.out.println("Player died: " + e);
         }
     }
-    public void run() {System.out.println("started!");
+    public void run() {
     	try {
     		while(true) {
     	   		String command = input.readLine();
     	   		if(command.startsWith("READY")) {
-    	   			System.out.println("checked");
     	   			ProjectServer.check();
     	   		}
     		}
@@ -55,7 +54,6 @@ public class Player extends Thread{
     }
 
     public void starting(){
-        System.out.println("player zrozumial, przekazuje dalej");
         output.println("STARTING");
     }
 }
