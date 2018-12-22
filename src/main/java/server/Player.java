@@ -36,6 +36,9 @@ public class Player extends Thread{
     		try {socket.close();} catch (IOException e1) {}
     	}
     }
+    public void addPlayer(int num) {
+    	output.println("ADD" + num);
+    }
     public void yourMove() {
     	output.println("YOUR MOVE");
     }
@@ -45,7 +48,6 @@ public class Player extends Thread{
     public void update() {
     	output.println("UPDATE ");
     }
-
     public void starting(){
         output.println("STARTING");
     }

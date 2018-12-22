@@ -116,10 +116,14 @@ public class Client extends Thread implements ActionListener {
         row++;
 
         pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[12][row].add(pole); pola[counter]=pole; counter++;
-
-      //todo przestawić dodawanie pionków na plansze gdzie indziej
+        /*
+        addPlayer0();
         addPlayer1();
+        addPlayer2();
+        addPlayer3();
         addPlayer4();
+        addPlayer5();
+        */
         f.add(panelglowny);
         f.setVisible(true);
         
@@ -200,6 +204,10 @@ public class Client extends Thread implements ActionListener {
 					messageLabel.setText("Twoj ruch");
 					messageLabel.repaint();
 				}
+				else if(response.startsWith("ADD")) {
+					addPlayer(Integer.parseInt("" + response.charAt(3)));
+					//System.out.println(response.charAt(3));
+				}
 				else if(response.startsWith("UPDATE")) {
 					//this.update(response.charAt(7), response.charAt(8) ,response.charAt(9), response.charAt(10));
 				}
@@ -210,13 +218,6 @@ public class Client extends Thread implements ActionListener {
 					messageLabel.setText("Ruch gracza " + response.charAt(5));
 					messageLabel.repaint();
 				}
-				//todo możliwe że nie potrzebne
-				/*
-                else if(response.startsWith("START")) {
-
-                	messageLabel.setText("zaczynamy");
-                	messageLabel.repaint();
-                }*/
 			}
 			out.println("QUIT");
 		} catch(IOException e){
@@ -233,12 +234,49 @@ public class Client extends Thread implements ActionListener {
 		return this.socket;
 	}
 	
+	public void addPlayer(int num) {
+		if(num == 0) addPlayer0();
+		else if(num == 1) addPlayer1();
+		else if(num == 2) addPlayer2();
+		else if(num == 3) addPlayer3();
+		else if(num == 4) addPlayer4();
+		else if(num == 5) addPlayer5();
+	}
+	
 	public void addPlayer1(){
         for (int z=1; z<=10; z++){pola[z].FieldColor=Color.RED; pola[z].setOccupied(); pola[z].repaint();}
     }
 
-    public void addPlayer4() {
+	public void addPlayer2() {
+		for (int z=11; z<=14; z++){pola[z].FieldColor=Color.BLUE; pola[z].setOccupied(); pola[z].repaint();}
+		for (int z=24; z<=26; z++){pola[z].FieldColor=Color.BLUE; pola[z].setOccupied(); pola[z].repaint();}
+		for (int z=36; z<=37; z++){pola[z].FieldColor=Color.BLUE; pola[z].setOccupied(); pola[z].repaint();}
+		pola[47].FieldColor=Color.BLUE; pola[47].setOccupied(); pola[47].repaint();
+	}
+	
+	public void addPlayer3() {
+		pola[75].FieldColor=Color.GREEN; pola[75].setOccupied(); pola[75].repaint();
+		for (int z=85; z<=86; z++){pola[z].FieldColor=Color.GREEN; pola[z].setOccupied(); pola[z].repaint();}
+		for (int z=96; z<=98; z++){pola[z].FieldColor=Color.GREEN; pola[z].setOccupied(); pola[z].repaint();}
+		for (int z=108; z<=111; z++){pola[z].FieldColor=Color.GREEN; pola[z].setOccupied(); pola[z].repaint();}
+	}
+	
+    public void addPlayer0() {
         for (int z=112; z<=121; z++){pola[z].FieldColor=Color.YELLOW; pola[z].setOccupied(); pola[z].repaint();}
+    }
+    
+    public void addPlayer5() {
+    	pola[66].FieldColor=Color.BLACK; pola[66].setOccupied(); pola[66].repaint();
+    	for (int z=76; z<=77; z++){pola[z].FieldColor=Color.BLACK; pola[z].setOccupied(); pola[z].repaint();}
+    	for (int z=87; z<=89; z++){pola[z].FieldColor=Color.BLACK; pola[z].setOccupied(); pola[z].repaint();}
+    	for (int z=99; z<=102; z++){pola[z].FieldColor=Color.BLACK; pola[z].setOccupied(); pola[z].repaint();}
+    }
+    
+    public void addPlayer4() {
+    	for (int z=20; z<=23; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
+    	for (int z=33; z<=35; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
+    	for (int z=45; z<=46; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
+    	pola[56].FieldColor=Color.ORANGE; pola[56].setOccupied(); pola[56].repaint();
     }
 
     public void update(int oldPlace, int newPlace) {
