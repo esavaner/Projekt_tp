@@ -61,61 +61,61 @@ public class Client extends Thread implements ActionListener {
         int counter=1;
         int row=0;
 
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[12][row].add(pole); pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 12, row); pole.addActionListener(this); panelHolder[12][row].add(pole); pola[counter]=pole; counter++;
         row++;
 
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[11][row].add(pole);  pola[counter]=pole; counter++;
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[13][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 11, row); pole.addActionListener(this); panelHolder[11][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 13, row); pole.addActionListener(this); panelHolder[13][row].add(pole);  pola[counter]=pole; counter++;
         row++;
 
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[10][row].add(pole);  pola[counter]=pole; counter++;
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[12][row].add(pole);  pola[counter]=pole; counter++;
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[14][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 10, row); pole.addActionListener(this); panelHolder[10][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 12, row); pole.addActionListener(this); panelHolder[12][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 14, row); pole.addActionListener(this); panelHolder[14][row].add(pole);  pola[counter]=pole; counter++;
         row++;
 
-        for(int z=9; z<=15; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=9; z<=15; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=0; z<=24; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=0; z<=24; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=1; z<=23; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=1; z<=23; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=2; z<=22; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=2; z<=22; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=3; z<=21; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=3; z<=21; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=4; z<=20; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=4; z<=20; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=3; z<=21; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=3; z<=21; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=2; z<=22; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=2; z<=22; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=1; z<=23; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=1; z<=23; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=0; z<=24; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
+        for(int z=0; z<=24; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole);  pola[counter]=pole; counter++;}
         row++;
 
-        for(int z=9; z<=15; z=z+2){pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[z][row].add(pole); pola[counter]=pole;  counter++;}
+        for(int z=9; z<=15; z=z+2){pole=new Field(defaultColor, counter, z, row); pole.addActionListener(this); panelHolder[z][row].add(pole); pola[counter]=pole;  counter++;}
         row++;
 
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[10][row].add(pole);  pola[counter]=pole; counter++;
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[12][row].add(pole);  pola[counter]=pole; counter++;
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[14][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 10, row); pole.addActionListener(this); panelHolder[10][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 12, row); pole.addActionListener(this); panelHolder[12][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 14, row); pole.addActionListener(this); panelHolder[14][row].add(pole);  pola[counter]=pole; counter++;
         row++;
 
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[11][row].add(pole);  pola[counter]=pole; counter++;
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[13][row].add(pole); pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 11, row); pole.addActionListener(this); panelHolder[11][row].add(pole);  pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 13, row); pole.addActionListener(this); panelHolder[13][row].add(pole); pola[counter]=pole; counter++;
         row++;
 
-        pole=new Field(defaultColor, counter); pole.addActionListener(this); panelHolder[12][row].add(pole); pola[counter]=pole; counter++;
+        pole=new Field(defaultColor, counter, 12, row); pole.addActionListener(this); panelHolder[12][row].add(pole); pola[counter]=pole; counter++;
         /*
         addPlayer0();
         addPlayer1();
@@ -160,7 +160,10 @@ public class Client extends Thread implements ActionListener {
 
                 if(moving){
 
+                    //przesuwanie
                     if(selected && !cb.isOccupied()){
+                        //zwykly ruch
+                        if(isNextTo(pole, cb)){
                         selected=false;
                         cb.FieldColor=temp;
                         pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
@@ -168,9 +171,25 @@ public class Client extends Thread implements ActionListener {
                         //tutaj jest ok, przekazuje move do outputstreama
                         out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
                         System.out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
-                        blocked = true;
+                        blocked = true;}
+
+                        //skakanie
+                        else if(ableToJump(pole, cb)){
+                            selected=false;
+                            cb.FieldColor=temp;
+                            pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
+                            cb.repaint(); pole.repaint();
+                            //tutaj jest ok, przekazuje move do outputstreama
+                            out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
+                            System.out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
+                            blocked = true;
+
+                        }
+
+
                     }
 
+                    // wybór pola gdy żadne nie jest wybrane
                     else if(!selected && cb.isOccupied()){
                         temp=cb.FieldColor;
                         pole=cb;
@@ -285,4 +304,17 @@ public class Client extends Thread implements ActionListener {
     	pola[newPlace].changeColor(oldColor);
     }
 
+    public boolean isNextTo(Field field1, Field field2){
+	    if(field1.x==field2.x+1 || field1.x==field2.x-1){if(field1.y==field2.y-1 || field1.y==field2.y+1) return true;}
+	    return false;
+    }
+    public boolean ableToJump(Field field1, Field field2){
+	    if(field1.x==field2.x+2 || field1.x==field2.x-2){
+	        if(field1.y==field2.y+2 || field1.y==field2.y-2){
+	            for (int v=1; v<122; v++){if(pola[v].y==(field1.y+field2.y)/2 && pola[v].x==(field1.x+field2.x)/2 && pola[v].isOccupied()) return true;}
+            }
+        }
+
+        return false;
+    }
 }

@@ -14,11 +14,15 @@ public class Field extends JButton {
     int nr;
     public Color FieldColor;
     Shape shape;
+    public int x;
+    public int y;
 
-    public Field(Color color, int number){
+    public Field(Color color, int number, int X, int Y){
         this.occupied = false;
         this.FieldColor = color;
         this.nr=number;
+        this.x=X;
+        this.y=Y;
         Dimension size = getPreferredSize();
         size.width = size.height = Math.max(size.width-5, size.height-5);
         setPreferredSize(size);
