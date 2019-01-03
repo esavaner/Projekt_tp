@@ -21,6 +21,7 @@ public class Client extends Thread implements ActionListener {
 	private BufferedReader in;
     private static PrintWriter out;
     private boolean blocked = true;
+    private String[] update;
 	Field[] pola;
 	Field pole;
 	JPanel[][] panelHolder;
@@ -169,8 +170,8 @@ public class Client extends Thread implements ActionListener {
                         pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
                         cb.repaint(); pole.repaint();
                         //tutaj jest ok, przekazuje move do outputstreama
-                        out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
-                        System.out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
+                        out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
+                        System.out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
                         blocked = true;}
 
                         //skakanie
@@ -180,8 +181,8 @@ public class Client extends Thread implements ActionListener {
                             pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
                             cb.repaint(); pole.repaint();
                             //tutaj jest ok, przekazuje move do outputstreama
-                            out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
-                            System.out.println("MOVE " + pole.getNumber() + " " + cb.getNumber());
+                            out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
+                            System.out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
                             blocked = true;
 
                         }
@@ -227,8 +228,9 @@ public class Client extends Thread implements ActionListener {
 					addPlayer(Integer.parseInt("" + response.charAt(3)));
 					//System.out.println(response.charAt(3));
 				}
-				else if(response.startsWith("UPDATE")) {
-					//this.update(response.charAt(7), response.charAt(8) ,response.charAt(9), response.charAt(10));
+				else if(response.startsWith("MOVE")) {
+					update = response.split(";");
+					this.update(Integer.parseInt(update[1]), Integer.parseInt(update[2]));
 				}
 				else if(response.startsWith("SHUTDOWN")) {
 					break;

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game extends Thread {
-	private Player currentPlayer;
+	private static Player currentPlayer;
+	private static boolean waiting = false;
 	private int current = 0;
 	public static List<Player> players = new ArrayList<Player>();
 	public void run() {
@@ -14,31 +15,31 @@ public class Game extends Thread {
 			p.starting();
 		}*/
 		while(true) {
-			currentPlayer = players.get(current);
-			for(Player p : players) {
-				if(p == currentPlayer) {
-					p.yourMove();
-				}
-				else {
-					p.otherMove(current + 1);
-				}
-			}
-			String command = currentPlayer.getIn();
-			if(command == null) {
-				System.out.println("null");
-			}
-			//pomimo przekazania move podczas ruchu gracza, serwer jej nie czyta
-			if(command.startsWith("MOVE")) {
+			if(waiting == false) {
+				currentPlayer = players.get(current);
 				for(Player p : players) {
-					if(p != currentPlayer) {
-						p.update();
+					if(p == currentPlayer) {
+						p.yourMove();
+					}
+					else {
+						p.otherMove(current + 1);
 					}
 				}
+				current = (current + 1)%players.size();
+				waiting = true;
 			}
-			current = (current + 1)%players.size();
 		}
 	}
 	public void add(Player player) {
 		players.add(player);
+	}
+	
+	public static void update(String command) {
+		for(Player p : players) {
+			if(p != currentPlayer) {
+				p.update(command);
+			}
+		}
+		waiting = false;
 	}
 }

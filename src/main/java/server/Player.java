@@ -27,6 +27,9 @@ public class Player extends Thread{
     	   		if(command.startsWith("READY")) {
     	   			ProjectServer.check();
     	   		}
+    	   		else if(command.startsWith("MOVE")) {
+    	   			Game.update(command);
+    	   		}
     		}
     	}
     	catch(IOException e) {
@@ -45,8 +48,8 @@ public class Player extends Thread{
     public void otherMove(int current) {
     	output.println("RUCH " + current);
     }
-    public void update() {
-    	output.println("UPDATE ");
+    public void update(String command) {
+    	output.println(command);
     }
     public void starting(){
         output.println("STARTING");
