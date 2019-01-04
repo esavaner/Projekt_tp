@@ -42,8 +42,8 @@ public class Player extends Thread{
     public void addPlayer(int num) {
     	output.println("ADD" + num);
     }
-    public void yourMove(int current) {
-    	output.println("YOUR" + current);
+    public void yourMove() {
+    	output.println("YOUR");
     }
     public void otherMove(int current) {
     	output.println("RUCH " + current);

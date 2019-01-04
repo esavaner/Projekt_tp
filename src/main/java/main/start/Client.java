@@ -263,7 +263,7 @@ public class Client extends Thread implements ActionListener {
 	}
 	
 	public void addPlayer1(){
-        for (int z=1; z<=10; z++){pola[z].FieldColor=Color.RED; pola[z].targetColor=Color.YELLOW; pola[z].setOccupied(); pola[z].repaint();}
+        for (int z=1; z<=10; z++){pola[z].FieldColor=Color.RED; pola[z].setOccupied(); pola[z].repaint();}
     }
 
 	public void addPlayer2() {
@@ -281,7 +281,7 @@ public class Client extends Thread implements ActionListener {
 	}
 	
     public void addPlayer0() {
-        for (int z=112; z<=121; z++){pola[z].FieldColor=Color.YELLOW; pola[z].targetColor=Color.RED; pola[z].setOccupied(); pola[z].repaint();}
+        for (int z=112; z<=121; z++){pola[z].FieldColor=Color.YELLOW; pola[z].setOccupied(); pola[z].repaint();}
     }
     
     public void addPlayer5() {

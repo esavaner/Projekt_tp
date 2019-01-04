@@ -13,7 +13,6 @@ public class Field extends JButton {
     boolean occupied;
     int nr;
     public Color FieldColor;
-    public Color targetColor;
     Shape shape;
     public int x;
     public int y;

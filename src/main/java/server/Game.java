@@ -15,7 +15,7 @@ public class Game extends Thread {
 				currentPlayer = players.get(current);
 				for(Player p : players) {
 					if(p == currentPlayer) {
-						p.yourMove(current);
+						p.yourMove();
 					}
 					else {
 						p.otherMove(current + 1);
