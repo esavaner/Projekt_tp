@@ -15,6 +15,7 @@ public class Game extends Thread {
 			p.starting();
 		}*/
 		while(true) {
+			System.out.println();
 			if(waiting == false) {
 				currentPlayer = players.get(current);
 				for(Player p : players) {
