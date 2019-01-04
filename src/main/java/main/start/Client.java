@@ -311,7 +311,7 @@ public class Client extends Thread implements ActionListener {
     public boolean isNextTo(Field field1, Field field2){
 	    if(field1.x==field2.x+1 || field1.x==field2.x-1){if(field1.y==field2.y-1 || field1.y==field2.y+1) return true;}
 	    if(field1.x==field2.x+2 || field1.x==field2.x-2){if(field1.y==field2.y) return true;}
-        if(field1.y==field2.y+1 || field1.y==field2.y-1){if(field1.x==field2.x) return true;}
+
 	    return false;
     }
     public boolean ableToJump(Field field1, Field field2){
@@ -325,11 +325,7 @@ public class Client extends Thread implements ActionListener {
                 for (int v=1; v<122; v++){if(pola[v].y==(field1.y+field2.y)/2 && pola[v].x==(field1.x+field2.x)/2 && pola[v].isOccupied()) return true;}
 
         }}
-        if(field1.y==field2.y+2 || field1.y==field2.y-2){
-            if(field2.x==field1.x){
-                for (int v=1; v<122; v++){if(pola[v].y==(field1.y+field2.y)/2 && pola[v].x==(field1.x+field2.x)/2 && pola[v].isOccupied()) return true;}
 
-            }}
 
         return false;
     }
