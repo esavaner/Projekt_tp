@@ -42,8 +42,8 @@ public class Player extends Thread{
     public void addPlayer(int num) {
     	output.println("ADD" + num);
     }
-    public void yourMove() {
-    	output.println("YOUR MOVE");
+    public void yourMove(int current) {
+    	output.println("YOUR" + current);
     }
     public void otherMove(int current) {
     	output.println("RUCH " + current);
@@ -51,8 +51,8 @@ public class Player extends Thread{
     public void update(String command) {
     	output.println(command);
     }
-    public void starting(){
-        output.println("STARTING");
+    public void starting(int playerNumber){
+        output.println("START" + playerNumber);
     }
     public String getIn() {
     	String command;

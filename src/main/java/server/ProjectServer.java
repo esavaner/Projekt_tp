@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.UnknownHostException;
 
-// uruchom serwer, poda ci twoje ip (jednoczesnie ip serwera); uruchom klase main (klient), jesli chcesz dolaczc do serwera musisz podac jego ip(twoje ip ktore wyswietlilo ci w konsoli)
 public class ProjectServer {
 	private static String server_IP;
 	private static ServerSocket listener;
@@ -33,22 +32,12 @@ public class ProjectServer {
             		for(Player p : game.players) {
             			p.addPlayer(playersJoined);
             		}
-            		playersJoined++;
             		System.out.println("Dolaczyl nowy gracz");
             		player.start();
+            		player.starting(playersJoined);
+            		playersJoined++;
             	}
             }
-        	/*
-            Player player1 = new Player(listener.accept());
-            game.add(player1);
-            playersJoined++;
-            System.out.println("Do��czy� nowy gracz");
-            Player player2 = new Player(listener.accept());
-            game.add(player2);
-            playersJoined++;
-            System.out.println("Do��czy� nowy gracz");
-            player1.start();
-            player2.start();*/
         } 
         finally {
             listener.close();

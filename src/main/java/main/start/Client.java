@@ -22,26 +22,30 @@ public class Client extends Thread implements ActionListener {
     private static PrintWriter out;
     private boolean blocked = true;
     private String[] update;
-	Field[] pola;
-	Field pole;
-	JPanel[][] panelHolder;
-	JPanel panelglowny;
-	CustomFrame f;
+	private Field[] pola;
+	private Field pole;
+	private JPanel[][] panelHolder;
+	private JPanel panelglowny;
+	private CustomFrame f;
 	boolean moving=true;
 	boolean selected=false;
-	Color defaultColor=Color.WHITE;
-	Color temp;
+	private Color defaultColor=Color.WHITE;
+	private Color temp;
+	private String colorName[] = {"zoltymi", "czerwonymi", "niebieskimi", "zielonymi", "pomaranczowymi", "czarnymi"};
+	private Color colorTable[] = {Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE, Color.BLACK};
+	private Color playerColor;
+	private int playerNumber;
+	
 	
 	public Client() throws Exception {
 		socket = new Socket(ipAddress, 8901);
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
-		//Main.f = new CustomFrame();
         f=new CustomFrame();
         int i = 25;
         int j = 18;
         panelHolder = new JPanel[i][j];
-        pola=new Field[122];//121 pól, numeracja od 1 bo pole nr 0 dziwnie wygląda
+        pola=new Field[122];
 
         panelglowny=new JPanel();
 
@@ -117,14 +121,6 @@ public class Client extends Thread implements ActionListener {
         row++;
 
         pole=new Field(defaultColor, counter, 12, row); pole.addActionListener(this); panelHolder[12][row].add(pole); pola[counter]=pole; counter++;
-        /*
-        addPlayer0();
-        addPlayer1();
-        addPlayer2();
-        addPlayer3();
-        addPlayer4();
-        addPlayer5();
-        */
         f.add(panelglowny);
         f.setVisible(true);
         
@@ -132,8 +128,8 @@ public class Client extends Thread implements ActionListener {
         final JPanel message = new JPanel();
         message.setPreferredSize(new Dimension((int)(f.getHeight()*0.8), (int)(f.getHeight()*0.1) ));
         message.setBounds(700,200,300,100);
-        messageLabel = new JLabel("Witaj w grze, oczekiwane na graczy");
-        messageLabel.setSize(280,70);
+        messageLabel = new JLabel();
+        messageLabel.setSize(280,120);
         message.setLayout(new FlowLayout())	;
         message.add(messageLabel);
         message.add(ready);
@@ -169,7 +165,6 @@ public class Client extends Thread implements ActionListener {
                         cb.FieldColor=temp;
                         pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
                         cb.repaint(); pole.repaint();
-                        //tutaj jest ok, przekazuje move do outputstreama
                         out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
                         System.out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
                         blocked = true;}
@@ -180,7 +175,6 @@ public class Client extends Thread implements ActionListener {
                             cb.FieldColor=temp;
                             pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
                             cb.repaint(); pole.repaint();
-                            //tutaj jest ok, przekazuje move do outputstreama
                             out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
                             System.out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
                             blocked = true;
@@ -191,7 +185,7 @@ public class Client extends Thread implements ActionListener {
                     }
 
                     // wybór pola gdy żadne nie jest wybrane
-                    else if(!selected && cb.isOccupied()){
+                    else if(!selected && cb.isOccupied() && (cb.getColor() == playerColor) ){
                         temp=cb.FieldColor;
                         pole=cb;
                         cb.FieldColor=Color.cyan;
@@ -219,14 +213,18 @@ public class Client extends Thread implements ActionListener {
 		try {
 			while(true) {
 				response = in.readLine();
-				if(response.startsWith("YOUR")) {
+				if(response.startsWith("START")) {
+					playerColor = colorTable[response.charAt(5)-'0'];
+					playerNumber = response.charAt(5)-'0';
+					messageLabel.setText("Witaj w grze, oczekiwane na graczy. Grasz " + colorName[(int)response.charAt(5)-'0'] + " pionkami ");
+				}
+				else if(response.startsWith("YOUR")) {
 					blocked = false;
-					messageLabel.setText("Twoj ruch");
+					messageLabel.setText("Twoj ruch. Grasz " + colorName[playerNumber] + " pionkami ");
 					messageLabel.repaint();
 				}
 				else if(response.startsWith("ADD")) {
 					addPlayer(Integer.parseInt("" + response.charAt(3)));
-					//System.out.println(response.charAt(3));
 				}
 				else if(response.startsWith("MOVE")) {
 					update = response.split(";");
@@ -265,7 +263,7 @@ public class Client extends Thread implements ActionListener {
 	}
 	
 	public void addPlayer1(){
-        for (int z=1; z<=10; z++){pola[z].FieldColor=Color.RED; pola[z].setOccupied(); pola[z].repaint();}
+        for (int z=1; z<=10; z++){pola[z].FieldColor=Color.RED; pola[z].targetColor=Color.YELLOW; pola[z].setOccupied(); pola[z].repaint();}
     }
 
 	public void addPlayer2() {
@@ -283,7 +281,7 @@ public class Client extends Thread implements ActionListener {
 	}
 	
     public void addPlayer0() {
-        for (int z=112; z<=121; z++){pola[z].FieldColor=Color.YELLOW; pola[z].setOccupied(); pola[z].repaint();}
+        for (int z=112; z<=121; z++){pola[z].FieldColor=Color.YELLOW; pola[z].targetColor=Color.RED; pola[z].setOccupied(); pola[z].repaint();}
     }
     
     public void addPlayer5() {

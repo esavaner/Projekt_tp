@@ -13,6 +13,7 @@ public class Field extends JButton {
     boolean occupied;
     int nr;
     public Color FieldColor;
+    public Color targetColor;
     Shape shape;
     public int x;
     public int y;
@@ -66,13 +67,11 @@ public class Field extends JButton {
         super.paintComponent(g);
     }
 
-    // paint a round border as opposed to a rectangular one
     protected void paintBorder(Graphics g) {
         g.setColor(getForeground());
         g.drawOval(0, 0, getSize().width-1, getSize().height-1);
     }
 
-    // only clicks within the round shape should be accepted
     public boolean contains(int x, int y) {
         if (shape == null || !shape.getBounds().equals(getBounds())) {
             shape = new Ellipse2D.Float(0, 0, getWidth(), getHeight());
