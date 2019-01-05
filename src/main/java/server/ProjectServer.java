@@ -32,7 +32,7 @@ public class ProjectServer {
             		}
             		for(Player p : Game.players) {
             			p.addPlayer(playersJoined);
-                        game.addPlayer(playersJoined);
+                        Game.addPlayer(playersJoined);
             		}
             		System.out.println("Dolaczyl nowy gracz");
             		player.start();
@@ -53,10 +53,11 @@ public class ProjectServer {
     				Bot bot = new Bot();
     				game.add(bot);
     				for(int i=0; i<playersJoined; i++) {
-    				bot.addPlayer(i);
+    					bot.addPlayer(i);
         			}
     				for(Player p : Game.players) {
         				p.addPlayer(playersJoined);
+        				Game.addPlayer(playersJoined);
         			}
         			System.out.println("Dolaczyl nowy gracz");
             		bot.starting(playersJoined);

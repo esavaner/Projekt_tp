@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -17,6 +18,8 @@ import table.CustomFrame;
 import table.Field;
 
 public class Bot extends Player {
+	private int targetX =0;
+	private int targetY =0;
 	private Socket socket;
     private String[] update;
 	private Field[] pola;
@@ -108,14 +111,14 @@ public class Bot extends Player {
         for (int z=112; z<=121; z++){pola[z].FieldColor=Color.YELLOW; pola[z].setOccupied(); pola[z].repaint();}
     }
     
-    public void addPlayer5() {
+    public void addPlayer4() {
     	pola[66].FieldColor=Color.BLACK; pola[66].setOccupied(); pola[66].repaint();
     	for (int z=76; z<=77; z++){pola[z].FieldColor=Color.BLACK; pola[z].setOccupied(); pola[z].repaint();}
     	for (int z=87; z<=89; z++){pola[z].FieldColor=Color.BLACK; pola[z].setOccupied(); pola[z].repaint();}
     	for (int z=99; z<=102; z++){pola[z].FieldColor=Color.BLACK; pola[z].setOccupied(); pola[z].repaint();}
     }
     
-    public void addPlayer4() {
+    public void addPlayer5() {
     	for (int z=20; z<=23; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
     	for (int z=33; z<=35; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
     	for (int z=45; z<=46; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
@@ -145,7 +148,38 @@ public class Bot extends Player {
     }
     
     public void doMove() {
-    	//Game.update("MOVE;;");
+    	try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    	double distance;
+    	double shortest = 100;
+    	Field shortestOld = null;
+    	Field shortestNew = null;
+    	int oldPlace = 0;
+    	int newPlace = 0 ;
+    	for(int z=1; z<=121; z++) {
+    		if(pola[z].getColor() == playerColor) {
+    			for(int z2=1; z2<=121; z2++) {
+    				if(isNextTo(pola[z2], pola[z]) && !pola[z2].isOccupied()) {
+    					distance = Math.sqrt(Math.pow(Math.abs(targetX-pola[z2].x), 2) + Math.pow(Math.abs(targetY-pola[z2].y), 2));
+    					if(distance < shortest) {
+    						shortest = distance;
+    						shortestOld = pola[z];
+    						shortestNew = pola[z2];
+    					}
+    				}
+    			}
+    		}
+    	}
+    	shortestNew.setOccupied();
+    	shortestNew.changeColor(playerColor);
+    	shortestOld.setEmpty();
+    	shortestOld.changeColor(defaultColor);
+		oldPlace = shortestOld.getNumber();
+		newPlace = shortestNew.getNumber();
+    	Game.update("MOVE;" + oldPlace + ";" + newPlace);
     }
     
     @Override
@@ -166,6 +200,14 @@ public class Bot extends Player {
 	public void starting(int playerN){
 		playerColor = colorTable[playerN];
 		playerNumber = playerN;
+		if(playerColor == Color.RED) {
+			targetX = 12;
+			targetY = 16;
+		}
+		else {
+			targetX = 0;
+			targetY = 24;
+		}
     }
 	
 	@Override

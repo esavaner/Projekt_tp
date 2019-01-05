@@ -86,14 +86,13 @@ public class Game extends Thread {
         for (int z=108; z<=111; z++){pola[z].FieldColor=Color.GREEN; pola[z].setOccupied(); pola[z].repaint();}
     }
 
-
-    public static void addPlayer4() {
+    public static void addPlayer5() {
         for (int z=20; z<=23; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
         for (int z=33; z<=35; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
         for (int z=45; z<=46; z++){pola[z].FieldColor=Color.ORANGE; pola[z].setOccupied(); pola[z].repaint();}
         pola[56].FieldColor=Color.ORANGE; pola[56].setOccupied(); pola[56].repaint();
     }
-    public static void addPlayer5() {
+    public static void addPlayer4() {
         pola[66].FieldColor=Color.BLACK; pola[66].setOccupied(); pola[66].repaint();
         for (int z=76; z<=77; z++){pola[z].FieldColor=Color.BLACK; pola[z].setOccupied(); pola[z].repaint();}
         for (int z=87; z<=89; z++){pola[z].FieldColor=Color.BLACK; pola[z].setOccupied(); pola[z].repaint();}
