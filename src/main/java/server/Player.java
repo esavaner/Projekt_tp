@@ -7,9 +7,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Player extends Thread{
-	Socket socket;
-    BufferedReader input;
-    PrintWriter output;
+	private Socket socket;
+    private BufferedReader input;
+    private PrintWriter output;
+    public Player() {
+    }
     public Player(Socket socket) {
     	this.socket = socket;
         try {
@@ -34,7 +36,9 @@ public class Player extends Thread{
     	}
     	catch(IOException e) {
     		System.out.println("Player died: "+ e);
-    	}
+    	} catch (Exception e) {
+			e.printStackTrace();
+		}
     	finally {
     		try {socket.close();} catch (IOException e1) {}
     	}
@@ -53,20 +57,5 @@ public class Player extends Thread{
     }
     public void starting(int playerNumber){
         output.println("START" + playerNumber);
-    }
-    public String getIn() {
-    	String command;
-    	try {
-    		command = input.readLine();
-    		if(command != null) {
-    			return command;
-    		}
-    		else {
-    			return null;
-    		}
-    	}
-    	catch (IOException e1) {
-    		return null;
-    	}
     }
 }

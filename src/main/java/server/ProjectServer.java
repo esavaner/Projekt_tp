@@ -1,5 +1,6 @@
 package server;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.UnknownHostException;
@@ -29,7 +30,7 @@ public class ProjectServer {
             		for(int i=0; i<playersJoined; i++) {
             			player.addPlayer(i);
             		}
-            		for(Player p : game.players) {
+            		for(Player p : Game.players) {
             			p.addPlayer(playersJoined);
             		}
             		System.out.println("Dolaczyl nowy gracz");
@@ -44,9 +45,22 @@ public class ProjectServer {
         }
 
     }
-    public static void check() {
+    public static void check() throws IOException, Exception {
     	playersReady++;
     	if(playersReady == playersJoined) {
+    		if(playersReady == 1 || playersReady == 5) {
+    				Bot bot = new Bot();
+    				game.add(bot);
+    				for(int i=0; i<playersJoined; i++) {
+    				bot.addPlayer(i);
+        			}
+    				for(Player p : Game.players) {
+        				p.addPlayer(playersJoined);
+        			}
+        			System.out.println("Dolaczyl nowy gracz");
+            		bot.starting(playersJoined);
+            		playersJoined++;
+    		}
     		gameStarted = true;
     		game.start();
     	}
