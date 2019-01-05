@@ -32,6 +32,7 @@ public class ProjectServer {
             		}
             		for(Player p : Game.players) {
             			p.addPlayer(playersJoined);
+                        game.addPlayer(playersJoined);
             		}
             		System.out.println("Dolaczyl nowy gracz");
             		player.start();
