@@ -2,6 +2,7 @@ package server;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Game extends Thread {
 	private static Player currentPlayer;
@@ -10,7 +11,11 @@ public class Game extends Thread {
 	public static List<Player> players = new ArrayList<Player>();
 	public void run() {
 		while(true) {
-			System.out.println();
+			try {
+				TimeUnit.MILLISECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			if(waiting == false) {
 				currentPlayer = players.get(current);
 				for(Player p : players) {

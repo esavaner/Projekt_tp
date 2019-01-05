@@ -24,8 +24,14 @@ public class Client extends Thread implements ActionListener {
     private String[] update;
 	private Field[] pola;
 	private Field pole;
+	private Field tmpField;
+	private Field jumpStart;
+	private Field jumpEnd;
 	private JPanel[][] panelHolder;
 	private JPanel panelglowny;
+	private JPanel message;
+	private JButton endTurn;
+	private boolean jumped=false;
 	private CustomFrame f;
 	boolean moving=true;
 	boolean selected=false;
@@ -125,7 +131,7 @@ public class Client extends Thread implements ActionListener {
         f.setVisible(true);
         
         final JButton ready = new JButton("Gotowosc");
-        final JPanel message = new JPanel();
+        message = new JPanel();
         message.setPreferredSize(new Dimension((int)(f.getHeight()*0.8), (int)(f.getHeight()*0.1) ));
         message.setBounds(700,200,300,100);
         messageLabel = new JLabel();
@@ -133,7 +139,32 @@ public class Client extends Thread implements ActionListener {
         message.setLayout(new FlowLayout())	;
         message.add(messageLabel);
         message.add(ready);
-        f.add(message);
+         f.add(message);
+
+
+
+
+        endTurn= new JButton("Zakoncz Ruch");
+        endTurn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                 selected=false;
+                if(jumped) {
+                    jumpEnd.FieldColor=playerColor;
+                    jumpEnd.repaint();
+                    out.println("MOVE;" + jumpStart.getNumber() + ";" + jumpEnd.getNumber());
+                    System.out.println("MOVE;" + jumpStart.getNumber() + ";" + jumpEnd.getNumber());
+                }
+                else out.println("MOVE;" + 1 + ";" + 1);
+
+                jumped=false;
+
+
+                blocked=true;
+
+            }
+        });;
+
+
         ready.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 message.remove(ready);
@@ -160,7 +191,7 @@ public class Client extends Thread implements ActionListener {
                     //przesuwanie
                     if(selected && !cb.isOccupied()){
                         //zwykly ruch
-                        if(isNextTo(pole, cb)){
+                        if(isNextTo(pole, cb) && !jumped){
                         selected=false;
                         cb.FieldColor=temp;
                         pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
@@ -170,14 +201,21 @@ public class Client extends Thread implements ActionListener {
                         blocked = true;}
 
                         //skakanie
-                        else if(ableToJump(pole, cb)){
+
+
+
+                        if(ableToJump(pole, cb)) {
+                            jumped=true;
                             selected=false;
-                            cb.FieldColor=temp;
+                            cb.FieldColor=Color.pink;
                             pole.FieldColor=defaultColor; pole.setEmpty(); cb.setOccupied();
                             cb.repaint(); pole.repaint();
-                            out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
-                            System.out.println("MOVE;" + pole.getNumber() + ";" + cb.getNumber());
-                            blocked = true;
+                            tmpField=cb;
+                            jumpEnd=cb;
+
+                            //blocked = true;
+
+
 
                         }
 
@@ -185,12 +223,33 @@ public class Client extends Thread implements ActionListener {
                     }
 
                     // wybór pola gdy żadne nie jest wybrane
-                    else if(!selected && cb.isOccupied() && (cb.getColor() == playerColor) ){
-                        temp=cb.FieldColor;
-                        pole=cb;
-                        cb.FieldColor=Color.cyan;
-                        cb.repaint();
-                        selected=true;}
+                    else if(!selected && cb.isOccupied()) {
+                        if (!jumped && (cb.getColor() == playerColor)) {
+                            jumpStart=cb;
+                            temp = cb.FieldColor;
+                            pole = cb;
+                            cb.FieldColor = Color.cyan;
+                            cb.repaint();
+                            selected = true;
+                        }
+
+                        if(jumped && cb==tmpField){
+                            temp = playerColor;
+                            pole = cb;
+                            cb.FieldColor = Color.cyan;
+                            cb.repaint();
+                            selected = true;
+                        }
+                    }
+
+                    //gdy gracz wybierze inne swoje pole, to zmieni wybor na nie
+                    if(selected && cb.isOccupied() && cb.getColor() == playerColor && !jumped){
+                       pole.FieldColor=temp;
+                       pole.repaint();
+                       pole=cb;
+                       cb.FieldColor=Color.cyan;
+                       cb.repaint();
+                    }
                 }
 
             }
@@ -221,7 +280,10 @@ public class Client extends Thread implements ActionListener {
 				else if(response.startsWith("YOUR")) {
 					blocked = false;
 					messageLabel.setText("Twoj ruch. Grasz " + colorName[playerNumber] + " pionkami ");
-					messageLabel.repaint();
+
+                    message.add(endTurn);
+                    message.repaint();
+                    messageLabel.repaint();
 				}
 				else if(response.startsWith("ADD")) {
 					addPlayer(Integer.parseInt("" + response.charAt(3)));
@@ -236,6 +298,8 @@ public class Client extends Thread implements ActionListener {
 				else if(response.startsWith("RUCH")) {
 					messageLabel.setText("Ruch gracza " + response.charAt(5));
 					messageLabel.repaint();
+                    message.remove(endTurn);
+                    message.repaint();
 				}
 			}
 			out.println("QUIT");
