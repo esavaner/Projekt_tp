@@ -39,6 +39,7 @@ public class Bot extends Player {
 	private Color colorTable[] = {Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE, Color.BLACK};
 	private Color playerColor;
 	private int playerNumber;
+	private boolean canMove=false;
 	public Bot() throws Exception {
 		super();
         int i = 25;
@@ -180,10 +181,19 @@ public class Bot extends Player {
 		oldPlace = shortestOld.getNumber();
 		newPlace = shortestNew.getNumber();
     	Game.update("MOVE;" + oldPlace + ";" + newPlace);
+
     }
     
     @Override
     public void run() {
+		while(true){
+			try {
+				TimeUnit.MILLISECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if(canMove) {doMove(); canMove=false;}
+		}
     }
     
 	@Override
@@ -212,7 +222,7 @@ public class Bot extends Player {
 	
 	@Override
 	public void yourMove() {
-		doMove();
+		canMove=true;
     }
 	
 	@Override

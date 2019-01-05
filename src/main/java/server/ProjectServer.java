@@ -61,6 +61,7 @@ public class ProjectServer {
         			}
         			System.out.println("Dolaczyl nowy gracz");
             		bot.starting(playersJoined);
+            		bot.start();
             		playersJoined++;
     		}
     		gameStarted = true;
