@@ -244,6 +244,7 @@ public class Client extends Thread implements ActionListener {
 
                     //gdy gracz wybierze inne swoje pole, to zmieni wybor na nie
                     if(selected && cb.isOccupied() && cb.getColor() == playerColor && !jumped){
+                        jumpStart=cb;
                        pole.FieldColor=temp;
                        pole.repaint();
                        pole=cb;
