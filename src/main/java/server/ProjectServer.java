@@ -15,7 +15,7 @@ public class ProjectServer {
     public static void main(String[] args) throws Exception {
     	try{
     	listener = new ServerSocket(8901);}
-    	catch (java.net.BindException e){System.out.println("może działać tylko jeden serwer!"); System.exit(1);}
+    	catch (java.net.BindException e){System.out.println("Moze dzialac tylko jeden serwer!"); System.exit(1);}
         System.out.println("Project Server is Running");
         try {
 	        InetAddress iAddress = InetAddress.getLocalHost();

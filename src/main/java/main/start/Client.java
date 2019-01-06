@@ -318,7 +318,7 @@ public class Client extends Thread implements ActionListener {
                 }
 
                 else if(response.startsWith("KILL")){
-                    messageLabel.setText("Utracono połączenie z serwerem");
+                    messageLabel.setText("Utracono polaczenie z serwerem");
                     messageLabel.repaint();
                     message.remove(endTurn);
                     message.repaint();

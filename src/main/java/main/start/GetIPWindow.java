@@ -20,17 +20,18 @@ public class GetIPWindow extends JDialog {
 		joinText = new JTextField();
 		joinText.setPreferredSize(new Dimension(170, 40));
 		this.add(joinText);
+		joinLabel = new JLabel("Podaj IP serwera");
 		JButton joinButton = new JButton("Dolacz");
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					join();
 				} catch (Exception e1) {
+					joinLabel.setText("Zly adres serwera, podaj jeszcze raz");
 				}
 			}
 		});
 		this.add(joinButton);
-		joinLabel = new JLabel("Podaj IP serwera");
 		this.add(joinLabel);
 		this.setBounds(700,200,270,120);
 	}
@@ -38,10 +39,10 @@ public class GetIPWindow extends JDialog {
 		this.setVisible(true);
 	}
 	public void join() throws Exception {
-		this.setVisible(false);
 		setIp();
 		Client.ipAddress = getIp();
 		Client client = Client.getClient();
+		this.setVisible(false);
 	}
 	public void setIp() {
 		ipAddress = joinText.getText();
