@@ -65,6 +65,10 @@ public class Player extends Thread{
     }
     public void otherWon(int playerNumber){output.println("LOST" + playerNumber);}
     public void youWon(){output.println("WINNER");}
-    public void kill(){
-        output.println("KILL");}
+    public void kill() {
+        try {
+            output.println("KILL");
+        } catch (NullPointerException e) {
+        }
+    }
 }
