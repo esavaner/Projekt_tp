@@ -6,17 +6,10 @@ import javax.swing.*;
 
 public class StartWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
-	public JButton startBotGame;
-	public JButton joinServer;
+	private JButton joinServer;
+	private JLabel joinLabel;
 	public StartWindow() {
-		//gra lokalna z botem
-		startBotGame = new JButton("Gra lokalna(z komputerem)");
-		startBotGame.setPreferredSize(new Dimension(220, 40));
-		startBotGame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				botGame();
-			}
-		});
+		joinLabel = new JLabel("Witaj w Trylmie!");
 		//dolaczenie do serwera multi(bez botow)
 		joinServer = new JButton("Do³¹cz do Serwera");
 		joinServer.setPreferredSize(new Dimension(220, 40));
@@ -26,9 +19,9 @@ public class StartWindow extends JDialog {
 			}
 		});
 		setLayout(new FlowLayout());
-		add(startBotGame);
+		add(joinLabel);
 		add(joinServer);
-		setBounds(700,200,270,140);
+		setBounds(700,200,270,115);
 		setResizable(false);
 		setVisible(true);
 	}
@@ -36,10 +29,5 @@ public class StartWindow extends JDialog {
 		this.setVisible(false);
 		GetIPWindow getIp = new GetIPWindow();
 		getIp.setVisible();
-	}
-	public void botGame() {
-		this.setVisible(false);
-		BotGameWindow bgwindow = new BotGameWindow();
-		bgwindow.setVisible();
 	}
 }

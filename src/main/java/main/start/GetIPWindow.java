@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 public class GetIPWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
+	private String ipAddress;
 	final JTextField joinText;
 	JLabel joinLabel;
 	public GetIPWindow() {
@@ -38,7 +39,8 @@ public class GetIPWindow extends JDialog {
 	}
 	public void join() throws Exception {
 		this.setVisible(false);
-		Client.ipAddress = joinText.getText();
+		ipAddress = joinText.getText();
+		Client.ipAddress = ipAddress.replaceAll("\\s", "");
 		Client client = Client.getClient();
 	}
 }

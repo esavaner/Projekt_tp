@@ -139,8 +139,8 @@ public class Bot extends Player {
     	double shortest = 100;
     	Field shortestOld = null;
     	Field shortestNew = null;
-    	int oldPlace = 0;
-    	int newPlace = 0 ;
+    	int oldPlace = 1;
+    	int newPlace = 1;
     	for(int z=1; z<=121; z++) {
     		if(pola[z].getColor() == playerColor) {
     			for(int z2=1; z2<=121; z2++) {
@@ -156,12 +156,14 @@ public class Bot extends Player {
     			}
     		}
     	}
-    	shortestNew.setOccupied();
-    	shortestNew.changeColor(playerColor);
-    	shortestOld.setEmpty();
-    	shortestOld.changeColor(defaultColor);
-		oldPlace = shortestOld.getNumber();
-		newPlace = shortestNew.getNumber();
+    	if(shortestNew != null) {
+    		shortestNew.setOccupied();
+    		shortestNew.changeColor(playerColor);
+    		shortestOld.setEmpty();
+    		shortestOld.changeColor(defaultColor);
+    		oldPlace = shortestOld.getNumber();
+    		newPlace = shortestNew.getNumber();
+    	}
     	Game.update("MOVE;" + oldPlace + ";" + newPlace);
 
     }
