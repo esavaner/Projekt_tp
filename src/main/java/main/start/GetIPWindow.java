@@ -20,7 +20,7 @@ public class GetIPWindow extends JDialog {
 		joinText = new JTextField();
 		joinText.setPreferredSize(new Dimension(170, 40));
 		this.add(joinText);
-		JButton joinButton = new JButton("DoÅ‚Ä…cz");
+		JButton joinButton = new JButton("Do³¹cz");
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -39,8 +39,14 @@ public class GetIPWindow extends JDialog {
 	}
 	public void join() throws Exception {
 		this.setVisible(false);
-		ipAddress = joinText.getText();
-		Client.ipAddress = ipAddress.replaceAll("\\s", "");
+		setIp();
+		Client.ipAddress = getIp();
 		Client client = Client.getClient();
+	}
+	public void setIp() {
+		ipAddress = joinText.getText();
+	}
+	public String getIp() {
+		return ipAddress.replaceAll("\\s", "");
 	}
 }

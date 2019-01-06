@@ -10,7 +10,7 @@ public class Field extends JButton {
      *
      */
     private static final long serialVersionUID = 1L;
-    boolean occupied;
+    public boolean occupied;
     int nr;
     public Color FieldColor;
     Shape shape;
