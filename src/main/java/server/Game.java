@@ -56,6 +56,7 @@ public class Game extends Thread {
         }
         waiting = false;
     }
+    
     public static void addPlayer(int num) {
         if(num == 0) addPlayer0();
         else if(num == 1) addPlayer1();

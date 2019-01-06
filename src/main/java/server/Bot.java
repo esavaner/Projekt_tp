@@ -1,44 +1,25 @@
 package server;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import main.start.Client;
-import table.CustomFrame;
 import table.Field;
 
 public class Bot extends Player {
 	private int targetX =0;
 	private int targetY =0;
-	private Socket socket;
     private String[] update;
 	private Field[] pola;
 	private Field pole;
-	private Field tmpField;
-	private Field jumpStart;
-	private Field jumpEnd;
 	private JPanel[][] panelHolder;
 	private JPanel panelglowny;
-	private JPanel message;
-	private boolean jumped=false;
-	private CustomFrame f;
 	boolean moving=true;
 	boolean selected=false;
 	private Color defaultColor=Color.WHITE;
-	private Color temp;
 	private Color colorTable[] = {Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE, Color.BLACK};
 	private Color playerColor;
-	private int playerNumber;
 	private boolean canMove=false;
 	public Bot() throws Exception {
 		super();
@@ -57,7 +38,6 @@ public class Bot extends Player {
             }
         }
 
-        //panelglowny.setPreferredSize(new Dimension((int)(f.getHeight()*0.8), (int)(f.getHeight()*0.9) ));
         int counter=1;
         int row=0;
         pole=new Field(defaultColor, counter, 12, row); panelHolder[12][row].add(pole);  pola[counter]=pole; counter++; row++;
@@ -154,7 +134,8 @@ public class Bot extends Player {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    	double distance;
+    	double distanceNew;
+    	double distanceOld;
     	double shortest = 100;
     	Field shortestOld = null;
     	Field shortestNew = null;
@@ -164,9 +145,10 @@ public class Bot extends Player {
     		if(pola[z].getColor() == playerColor) {
     			for(int z2=1; z2<=121; z2++) {
     				if(isNextTo(pola[z2], pola[z]) && !pola[z2].isOccupied()) {
-    					distance = Math.sqrt(Math.pow(Math.abs(targetX-pola[z2].x), 2) + Math.pow(Math.abs(targetY-pola[z2].y), 2));
-    					if(distance < shortest) {
-    						shortest = distance;
+    					distanceNew = Math.sqrt(Math.pow(Math.abs(targetX-pola[z2].x), 2) + Math.pow(Math.abs(targetY-pola[z2].y), 2));
+    					distanceOld = Math.sqrt(Math.pow(Math.abs(targetX-pola[z].x), 2) + Math.pow(Math.abs(targetY-pola[z].y), 2));
+    					if(distanceNew < shortest && distanceNew < distanceOld) {
+    						shortest = distanceNew;
     						shortestOld = pola[z];
     						shortestNew = pola[z2];
     					}
@@ -209,7 +191,6 @@ public class Bot extends Player {
 	@Override
 	public void starting(int playerN){
 		playerColor = colorTable[playerN];
-		playerNumber = playerN;
 		if(playerColor == Color.RED) {
 			targetX = 12;
 			targetY = 16;
