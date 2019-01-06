@@ -1,9 +1,7 @@
 package server;
 
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.UnknownHostException;
+import java.net.*;
 
 /**
  * klasa odpowiada za dzialanie serwera, polaczenie graczy i uruchomienie gry
@@ -21,9 +19,14 @@ public class ProjectServer {
     	catch (java.net.BindException e){System.out.println("Moze dzialac tylko jeden serwer!"); System.exit(1);}
         System.out.println("Project Server is Running");
         try {
-	        InetAddress iAddress = InetAddress.getLocalHost();
-	        server_IP = iAddress.getHostAddress();
-	        System.out.println("Server IP address : " +server_IP);
+            //InetAddress iAddress = InetAddress.getLocalHost();
+            //server_IP = iAddress.getHostAddress();
+            Socket socket = new Socket();
+            socket.connect(new InetSocketAddress("google.com", 80));
+            //System.out.println(socket.getLocalAddress());
+            server_IP=socket.getLocalAddress().getHostAddress();
+            System.out.println(server_IP);
+            socket.close();
 	    } catch (UnknownHostException e) {
 	    }
         try {
