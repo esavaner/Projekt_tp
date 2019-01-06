@@ -302,6 +302,20 @@ public class Client extends Thread implements ActionListener {
                     message.remove(endTurn);
                     message.repaint();
 				}
+				else if(response.startsWith("WINN")){
+				    messageLabel.setText("Wygrales!!!");
+				    messageLabel.repaint();
+				    message.remove(endTurn);
+				    message.repaint();
+				    blocked=true;
+                }
+                else if(response.startsWith("LOST")){
+                    messageLabel.setText("Koniec gry, wygral gracz  " + response.charAt(4));
+                    messageLabel.repaint();
+                    message.remove(endTurn);
+                    message.repaint();
+                    blocked=true;
+                }
 			}
 			out.println("QUIT");
 		} catch(IOException e){

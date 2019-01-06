@@ -58,4 +58,6 @@ public class Player extends Thread{
     public void starting(int playerNumber){
         output.println("START" + playerNumber);
     }
+    public void otherWon(int playerNumber){output.println("LOST" + playerNumber);}
+    public void youWon(){output.println("WINNER");}
 }

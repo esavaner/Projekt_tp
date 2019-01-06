@@ -14,6 +14,7 @@ public class Game extends Thread {
     private static Field[] pola= new Field[122];
     private static Color defaultColor=Color.WHITE;
     public static String[] update;
+    private static int i;
     public static List<Player> players = new ArrayList<Player>();
     public Game(){for(int i=1; i<122; i++) pola[i]=new Field(i);}
     public void run() {
@@ -43,6 +44,7 @@ public class Game extends Thread {
     }
 
     public static void update(String command) {
+
         for(Player p : players) {
             if(p != currentPlayer) {
                 p.update(command);
@@ -50,11 +52,17 @@ public class Game extends Thread {
         }
         update = command.split(";");
         update(Integer.parseInt(update[1]), Integer.parseInt(update[2]));
-        if(hasWon(0) || hasWon(1) || hasWon(2) || hasWon(3) || hasWon(4) || hasWon(5)){
-            System.out.println("któryś gracz wygrał");
-
-        }
         waiting = false;
+            for(i=0; i<=5; i++){if(hasWon(i)) break;}
+            if(i<6){
+                players.get(i).youWon();
+                for(int j=1; j<players.size(); j++){players.get((i+j)%players.size()).otherWon(i+1);}
+            waiting=true;
+            }
+
+
+
+
     }
     
     public static void addPlayer(int num) {
