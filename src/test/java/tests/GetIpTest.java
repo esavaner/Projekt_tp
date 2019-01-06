@@ -33,7 +33,7 @@ public class GetIpTest {
 		bot.mouseMove(720, 250);
 		bot.mousePress(InputEvent.BUTTON1_MASK);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(700);
 		}
 		catch (InterruptedException e){}
 		bot.mouseRelease(InputEvent.BUTTON1_MASK);
@@ -44,12 +44,12 @@ public class GetIpTest {
 		bot.mouseMove(920, 250);
 		bot.mousePress(InputEvent.BUTTON1_MASK);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(700);
 		}
 		catch (InterruptedException e){}
 		bot.mouseRelease(InputEvent.BUTTON1_MASK);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(700);
 		}
 		catch (InterruptedException e){}
 		assertEquals(ipWindow.getIp(), "192.168.42.184");

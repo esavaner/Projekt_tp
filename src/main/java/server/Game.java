@@ -53,16 +53,12 @@ public class Game extends Thread {
         update = command.split(";");
         update(Integer.parseInt(update[1]), Integer.parseInt(update[2]));
         waiting = false;
-            for(i=0; i<=5; i++){if(hasWon(i)) break;}
-            if(i<6){
-                players.get(i).youWon();
-                for(int j=1; j<players.size(); j++){players.get((i+j)%players.size()).otherWon(i+1);}
-            waiting=true;
-            }
-
-
-
-
+        for(i=0; i<=5; i++){if(hasWon(i)) break;}
+        if(i<6){
+            players.get(i).youWon();
+            for(int j=1; j<players.size(); j++){players.get((i+j)%players.size()).otherWon(i+1);}
+        waiting=true;
+        }
     }
     
     public static void addPlayer(int num) {

@@ -8,19 +8,19 @@ import javax.swing.JPanel;
 import table.Field;
 
 public class Bot extends Player {
-	private int targetX =0;
-	private int targetY =0;
-    private String[] update;
-	private Field[] pola;
-	private Field pole;
-	private JPanel[][] panelHolder;
-	private JPanel panelglowny;
-	boolean moving=true;
-	boolean selected=false;
-	private Color defaultColor=Color.WHITE;
-	private Color colorTable[] = {Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE, Color.BLACK};
-	private Color playerColor;
-	private boolean canMove=false;
+	public int targetX =0;
+	public int targetY =0;
+	public String[] update;
+	public Field[] pola;
+	public Field pole;
+	public JPanel[][] panelHolder;
+	public JPanel panelglowny;
+	public boolean moving=true;
+	public boolean selected=false;
+	public Color defaultColor=Color.WHITE;
+	public Color colorTable[] = {Color.YELLOW, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE, Color.BLACK};
+	public Color playerColor;
+	public boolean canMove=false;
 	public Bot() throws Exception {
 		super();
         int i = 25;
@@ -112,25 +112,10 @@ public class Bot extends Player {
 
 	    return false;
     }
-    public boolean ableToJump(Field field1, Field field2){
-	    if(field1.x==field2.x+2 || field1.x==field2.x-2){
-	        if(field1.y==field2.y+2 || field1.y==field2.y-2){
-	            for (int v=1; v<122; v++){if(pola[v].y==(field1.y+field2.y)/2 && pola[v].x==(field1.x+field2.x)/2 && pola[v].isOccupied()) return true;}
-            }
-        }
-        if(field1.x==field2.x+4 || field1.x==field2.x-4){
-            if(field2.y==field1.y){
-                for (int v=1; v<122; v++){if(pola[v].y==(field1.y+field2.y)/2 && pola[v].x==(field1.x+field2.x)/2 && pola[v].isOccupied()) return true;}
-
-        }}
-
-
-        return false;
-    }
     
     public void doMove() {
     	try {
-            TimeUnit.SECONDS.sleep(1);
+            TimeUnit.MILLISECONDS.sleep(600);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
