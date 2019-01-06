@@ -20,7 +20,7 @@ public class GetIPWindow extends JDialog {
 		joinText = new JTextField();
 		joinText.setPreferredSize(new Dimension(170, 40));
 		this.add(joinText);
-		JButton joinButton = new JButton("Do³¹cz");
+		JButton joinButton = new JButton("DoÅ‚Ä…cz");
 		joinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {

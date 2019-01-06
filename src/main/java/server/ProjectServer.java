@@ -13,7 +13,9 @@ public class ProjectServer {
 	private static int playersReady = 0;
 	private static Game game;
     public static void main(String[] args) throws Exception {
-    	listener = new ServerSocket(8901);
+    	try{
+    	listener = new ServerSocket(8901);}
+    	catch (java.net.BindException e){System.out.println("może działać tylko jeden serwer!"); System.exit(1);}
         System.out.println("Project Server is Running");
         try {
 	        InetAddress iAddress = InetAddress.getLocalHost();

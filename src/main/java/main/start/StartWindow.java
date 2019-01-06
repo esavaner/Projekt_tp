@@ -11,7 +11,7 @@ public class StartWindow extends JDialog {
 	public StartWindow() {
 		joinLabel = new JLabel("Witaj w Trylmie!");
 		//dolaczenie do serwera multi(bez botow)
-		joinServer = new JButton("Do³¹cz do Serwera");
+		joinServer = new JButton("DoÅ‚Ä…cz do Serwera");
 		joinServer.setPreferredSize(new Dimension(220, 40));
 		joinServer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
