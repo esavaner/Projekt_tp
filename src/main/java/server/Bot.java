@@ -200,7 +200,16 @@ public class Bot extends Player {
 	@Override
     public void otherMove(int current) {
     }
-	
+    @Override
+	public void otherWon(int playerNumber){canMove=false;}
+
+	@Override
+	public void youWon() {
+
+	}
+	@Override
+	public void kill(){}
+
 	@Override
 	public void update(String command) {
 		update = command.split(";");
