@@ -1,7 +1,9 @@
 package main.start;
 
 import table.CustomFrame;
-//klasa main
+/**
+Klasa Main odpowiada za uruchomienie okna startowego Clienta
+ */
 public class Main { 
 	public static CustomFrame f;
 	private StartWindow sw;

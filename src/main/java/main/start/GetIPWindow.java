@@ -15,6 +15,10 @@ public class GetIPWindow extends JDialog {
 	private String ipAddress;
 	final JTextField joinText;
 	JLabel joinLabel;
+
+	/**
+	 * klasa GetIPWindow odpowiada za polaczenie gracza z serwerem oraz uruchomienie okienka z grą(kl. Client)
+	 */
 	public GetIPWindow() {
 		setLayout(new FlowLayout());
 		joinText = new JTextField();

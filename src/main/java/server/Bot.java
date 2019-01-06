@@ -7,6 +7,10 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JPanel;
 import table.Field;
 
+/**
+ * klasa Bot jest prosta implementacja komputerowego gracza
+ */
+
 public class Bot extends Player {
 	public int targetX =0;
 	public int targetY =0;

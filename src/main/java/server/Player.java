@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+/**
+ * klasa jest reprezentacja gracza na serwerze,
+ * odpowiada za komunikacje miedzy Clientem a Game, czyli graczem a rozgrywka
+ */
 public class Player extends Thread{
 	private Socket socket;
     private BufferedReader input;

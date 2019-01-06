@@ -3,14 +3,15 @@ package main.start;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+/**
+Klasa StartWindow odpowiada za okno startowe programu
+ */
 public class StartWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JButton joinServer;
 	private JLabel joinLabel;
 	public StartWindow() {
 		joinLabel = new JLabel("Witaj w Trylmie!");
-		//dolaczenie do serwera multi(bez botow)
 		joinServer = new JButton("Dolacz do Serwera");
 		joinServer.setPreferredSize(new Dimension(220, 40));
 		joinServer.addActionListener(new ActionListener() {

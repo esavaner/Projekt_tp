@@ -4,10 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-//pole na planszy
+
 public class Field extends JButton {
     /**
-     *
+     *pole na planszy
      */
     private static final long serialVersionUID = 1L;
     public boolean occupied;

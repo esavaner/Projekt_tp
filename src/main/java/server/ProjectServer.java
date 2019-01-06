@@ -5,6 +5,9 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.UnknownHostException;
 
+/**
+ * klasa odpowiada za dzialanie serwera, polaczenie graczy i uruchomienie gry
+ */
 public class ProjectServer {
 	private static String server_IP;
 	private static ServerSocket listener;

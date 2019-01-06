@@ -6,6 +6,9 @@ import java.awt.*;
 
 import javax.swing.*;
 
+/**
+ * okienko gry uzywane przez Clienta
+ */
 public class CustomFrame extends JFrame{
 	private static final long serialVersionUID = 1L;
 

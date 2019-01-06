@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * klasa Game odpowiada za komunikacje miedzy grajacymi, kolejnosc ruchow,
+ * przekazywanie informacji o ruchach innych graczy oraz za zakonczenie rozgrywki
+ */
 public class Game extends Thread {
     private static Player currentPlayer;
     private static boolean waiting = false;

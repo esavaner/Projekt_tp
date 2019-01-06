@@ -12,7 +12,10 @@ import table.CustomFrame;
 import table.Field;
 
 import javax.swing.*;
-
+/**
+ klasa Client jest odpowiedzialna za okienko gry dla gracza
+ oraz komunikuje się z klasą Player odpowiedzialną za przedstawienie gracza na serwerze
+ */
 public class Client extends Thread implements ActionListener {
 	public static JLabel messageLabel;
 	private volatile static Client instance = null;
@@ -224,6 +227,7 @@ public class Client extends Thread implements ActionListener {
 
                     // wybór pola gdy żadne nie jest wybrane
                     else if(!selected && cb.isOccupied()) {
+                        //gdy gracz nie wykonal jeszcze zadnego ruchu
                         if (!jumped && (cb.getColor() == playerColor)) {
                             jumpStart=cb;
                             temp = cb.FieldColor;
@@ -232,7 +236,7 @@ public class Client extends Thread implements ActionListener {
                             cb.repaint();
                             selected = true;
                         }
-
+                        //gdy gracz juz skoczyl
                         if(jumped && cb==tmpField){
                             temp = playerColor;
                             pole = cb;
