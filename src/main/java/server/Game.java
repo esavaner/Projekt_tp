@@ -147,4 +147,9 @@ public class Game extends Thread {
 
         return true;
     }
+
+    public static void kill(){
+        for(Player p : players) {p.kill();}
+        System.exit(1);
+    }
 }

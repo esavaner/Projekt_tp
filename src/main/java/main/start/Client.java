@@ -316,6 +316,14 @@ public class Client extends Thread implements ActionListener {
                     message.repaint();
                     blocked=true;
                 }
+
+                else if(response.startsWith("KILL")){
+                    messageLabel.setText("Utracono połączenie z serwerem");
+                    messageLabel.repaint();
+                    message.remove(endTurn);
+                    message.repaint();
+                    blocked=true;
+                }
 			}
 			out.println("QUIT");
 		} catch(IOException e){

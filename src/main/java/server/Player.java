@@ -35,9 +35,10 @@ public class Player extends Thread{
     		}
     	}
     	catch(IOException e) {
-    		System.out.println("Player died: "+ e);
+    		System.out.println("Player died: "+ e); ProjectServer.kill();
     	} catch (Exception e) {
 			e.printStackTrace();
+
 		}
     	finally {
     		try {socket.close();} catch (IOException e1) {}
@@ -60,4 +61,6 @@ public class Player extends Thread{
     }
     public void otherWon(int playerNumber){output.println("LOST" + playerNumber);}
     public void youWon(){output.println("WINNER");}
+    public void kill(){
+        output.println("KILL");}
 }

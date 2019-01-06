@@ -70,4 +70,8 @@ public class ProjectServer {
     		game.start();
     	}
     }
+    public static void kill(){
+    	Game.kill();
+    	System.exit(1);
+	}
 }
