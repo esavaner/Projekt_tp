@@ -19,11 +19,8 @@ public class ProjectServer {
     	catch (java.net.BindException e){System.out.println("Moze dzialac tylko jeden serwer!"); System.exit(1);}
         System.out.println("Project Server is Running");
         try {
-            //InetAddress iAddress = InetAddress.getLocalHost();
-            //server_IP = iAddress.getHostAddress();
             Socket socket = new Socket();
             socket.connect(new InetSocketAddress("google.com", 80));
-            //System.out.println(socket.getLocalAddress());
             server_IP=socket.getLocalAddress().getHostAddress();
             System.out.println(server_IP);
             socket.close();

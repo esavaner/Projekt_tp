@@ -125,7 +125,7 @@ public class Bot extends Player {
         }
     	double distanceNew;
     	double distanceOld;
-    	double shortest = 100;
+    	double shortest = 200;
     	Field shortestOld = null;
     	Field shortestNew = null;
     	int oldPlace = 1;
@@ -187,8 +187,8 @@ public class Bot extends Player {
 			targetY = 16;
 		}
 		else {
-			targetX = 4;
-			targetY = 24;
+			targetX = 24;
+			targetY = 4;
 		}
     }
 	
